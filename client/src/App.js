@@ -1,15 +1,15 @@
-import React from 'react';
-import SearchApp from './components/SearchApp';
+// src/App.js
+import React, { useState } from 'react';
 import Header from './components/Header';
+import SearchResultTable from './components/SearchResultTable';
 
 function App() {
-  return (
+   return (
     <div>
       <Header />
-      <SearchApp />
+      <SearchResultTable />
     </div>
   );
 }
 
 export default App;
-
