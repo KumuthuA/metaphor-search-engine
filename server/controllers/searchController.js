@@ -22,7 +22,6 @@ async function getAllMetaphors(req, res) {
             }
           }
         );
-        console.log(result.hits.hits)
         res.json(result.hits.hits);
     } catch (error) {
         console.error(error);
@@ -33,7 +32,7 @@ async function getAllMetaphors(req, res) {
 
 async function searchMetaphors(req, res) {
     try {
-        const { source, target, poet, poem, year, mood} = req.query;
+        const { source, target, poet, poem, year, mood} = req.body;
         const mustQueries = [];
     
         if (source) mustQueries.push({ match: { source: source } });
@@ -46,6 +45,7 @@ async function searchMetaphors(req, res) {
         if (mustQueries.length === 0) {
           return res.status(400).send({ message: 'Search parameters are empty' });
         }
+        console.log(mustQueries)
     
         const data = await client.search({
           index: 'sinhala-metaphors',

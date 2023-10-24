@@ -1,17 +1,15 @@
-// src/theme.js
 import { createTheme } from '@mui/material/styles';
 
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#6b0772', // Change this to your primary color
+      main: '#6b0772', 
     },
     secondary: {
-      main: '#FF5722', // Change this to your secondary color
-    },
+      main: '#FF5722', 
   },
   typography: {
-    fontFamily: 'Arial, sans-serif', // Change this to your preferred font
+    fontFamily: 'Arial, sans-serif', 
   },
 });
 
