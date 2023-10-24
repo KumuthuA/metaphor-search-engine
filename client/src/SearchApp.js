@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 import { TextField, Button, List, ListItem, ListItemText, Typography } from '@material-ui/core';
 
 function SearchApp() {
@@ -11,10 +12,20 @@ function SearchApp() {
     setSearchQuery(event.target.value);
   };
 
-  const handleSearch = () => {
-    const results = performSearch(searchQuery);
-    setSearchResults(results);
-    setNoResults(results.length === 0);
+  const handleSearch = async () => {
+    try {
+      const response = await axios.get('http://localhost:3000/search', {
+        params: {
+          query: searchQuery,
+        },
+      });
+
+      const results = response.data;
+      setSearchResults(results);
+      setNoResults(results.length === 0);
+    } catch (error) {
+      console.error('Error fetching search results:', error);
+    }
   };
 
   return (
