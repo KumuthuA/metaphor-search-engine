@@ -7,7 +7,6 @@ function SearchApp() {
   const [searchResults, setSearchResults] = useState([]);
   const [noResults, setNoResults] = useState(false);
 
-  // Function to handle the search input change
   const handleSearchInputChange = (event) => {
     setSearchQuery(event.target.value);
   };
@@ -48,7 +47,7 @@ function SearchApp() {
       >
         Search
       </Button>
-      {noResults ? (
+      {/* {noResults ? (
         <Typography variant="body1" color="textSecondary">
           No results found.
         </Typography>
@@ -60,24 +59,10 @@ function SearchApp() {
             </ListItem>
           ))}
         </List>
-      )}
+      )} */}
     </div>
   );
 }
 
-function performSearch(query) {
-  // Simulated search results, replace with your search implementation
-  const mockResults = [
-    'Result 1',
-    'Result 2',
-    'Result 3',
-  ];
-
-  const filteredResults = mockResults.filter((result) =>
-    result.toLowerCase().includes(query.toLowerCase())
-  );
-
-  return filteredResults;
-}
 
 export default SearchApp;

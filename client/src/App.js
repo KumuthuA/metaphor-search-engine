@@ -1,13 +1,15 @@
 import React from 'react';
-import SearchApp from './SearchApp';
+import SearchApp from './components/SearchApp';
+import Header from './components/Header';
 
 function App() {
   return (
-    <div className="App">
-      <h1>Metaphor Engine</h1>
+    <div>
+      <Header />
       <SearchApp />
     </div>
   );
 }
 
 export default App;
+
