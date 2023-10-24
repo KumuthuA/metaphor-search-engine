@@ -7,7 +7,7 @@ app.use(express.json());
 
 const {getAllMetaphors,  searchMetaphors } = require('./controllers/searchController');
 
-app.get('/search', searchMetaphors);
+app.post('/search', searchMetaphors);
 app.get('/metaphors', getAllMetaphors);
 
 

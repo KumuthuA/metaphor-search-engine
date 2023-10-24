@@ -1,44 +1,4 @@
-// import React from 'react';
-// import Paper from '@mui/material/Paper';
-// import TableContainer from '@mui/material/TableContainer';
-// import Table from '@mui/material/Table';
-// import TableHead from '@mui/material/TableHead';
-// import TableBody from '@mui/material/TableBody';
-// import TableRow from '@mui/material/TableRow';
-// import TableCell from '@mui/material/TableCell';
-
-// const SearchResultTable = ({ results }) => {
-//   return (
-//     <TableContainer component={Paper}>
-//       <Table>
-//         <TableHead>
-//           <TableRow>
-//             <TableCell>Column1</TableCell>
-//             <TableCell>Column2</TableCell>
-//             <TableCell>Column3</TableCell>
-//             {/* Add more columns for your data */}
-//           </TableRow>
-//         </TableHead>
-//         <TableBody>
-//           {results.map((result, index) => (
-//             <TableRow key={index}>
-//               <TableCell>{result.column1}</TableCell>
-//               <TableCell>{result.column2}</TableCell>
-//               <TableCell>{result.column3}</TableCell>
-//               {/* Map and display more data as needed */}
-//             </TableRow>
-//           ))}
-//         </TableBody>
-//       </Table>
-//     </TableContainer>
-//   );
-// };
-
-// export default SearchResultTable;
-
-
-// SearchComponent.js
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, TextField, Grid } from '@mui/material';
 import { DataGrid } from '@mui/x-data-grid';
 import { makeStyles } from '@mui/styles';
@@ -51,11 +11,13 @@ const useStyles = makeStyles((theme) => ({
 
 const SearchResultTable = () => {
   const classes = useStyles();
+  const apiUrl = process.env.REACT_APP_API_URL;
   const [searchData, setSearchData] = useState({
-    poet: '',
-    poem: '',
+    line:'',
     source: '',
     target: '',
+    poet: '',
+    poem: '',
     year: '',
     mood: ''
   });
@@ -69,11 +31,38 @@ const SearchResultTable = () => {
     });
   };
 
+  useEffect(() => {
+    fetch(`${apiUrl}/metaphors`, {
+      method: 'GET',
+    })
+      .then((response) => response.json())
+      .then((data) => {
+        const allData = data.map((item) => ({
+          id: item._id,
+          poet: item._source.poet,
+          poem: item._source.poem,
+          source: item._source.source,
+          target: item._source.target,
+          year: item._source.year,
+          mood: item._source.mood,
+          interpretation: item._source.interpretation,
+          metaphor: item._source.line,
+        }));
+        setRows(allData);
+      })
+      .catch((error) => {
+        console.error('Error:', error);
+      });
+  }, []);
+
   const handleSearch = () => {
     const searchDataToSend = { ...searchData };
-  
-    fetch('http://localhost:8080/metaphors', {
-      method: 'GET',
+    fetch(`${apiUrl}/search`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json', 
+      },
+      body: JSON.stringify(searchDataToSend), 
     })
       .then((response) => response.json())
       .then((data) => {
@@ -85,19 +74,23 @@ const SearchResultTable = () => {
           target: item._source.target,
           year: item._source.year,
           mood: item._source.mood,
+          interpretation: item._source.interpretation,
+          metaphor: item._source.line
         }));
         setRows(filteredData);
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error('Error');
       });
   };
 
   const columns = [
-    { field: 'poet', headerName: 'Poet', width: 300 },
-    { field: 'poem', headerName: 'Poem', width: 150 },
+    { field: 'metaphor', headerName: 'Metaphor', width: 200 },
+    { field: 'interpretation', headerName: 'Interpretation', width: 300 },
     { field: 'source', headerName: 'Source', width: 150 },
     { field: 'target', headerName: 'Target', width: 150 },
+    { field: 'poet', headerName: 'Poet', width: 150 },
+    { field: 'poem', headerName: 'Poem', width: 150 },
     { field: 'year', headerName: 'Year', width: 150 },
     { field: 'mood', headerName: 'Mood', width: 150 }
   ];

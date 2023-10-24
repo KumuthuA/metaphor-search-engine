@@ -22,6 +22,7 @@ async function getAllMetaphors(req, res) {
             }
           }
         );
+        console.log(result.hits.hits)
         res.json(result.hits.hits);
     } catch (error) {
         console.error(error);
@@ -32,16 +33,18 @@ async function getAllMetaphors(req, res) {
 
 async function searchMetaphors(req, res) {
     try {
-        const { metaphor, lyrics, author, poem } = req.query;
+        const { source, target, poet, poem, year, mood} = req.query;
         const mustQueries = [];
     
-        if (metaphor) mustQueries.push({ match: { source_domain: metaphor } });
-        if (lyrics) mustQueries.push({ match_phrase: { lyrics: lyrics } });
-        if (author) mustQueries.push({ match: { poet: author } });
+        if (source) mustQueries.push({ match: { source: source } });
+        if (poet) mustQueries.push({ match: { poet: poet } });
         if (poem) mustQueries.push({ match: { poem: poem } });
+        if (target) mustQueries.push({ match: { target: target } });
+        if (year) mustQueries.push({ match: { year: year } });
+        if (mood) mustQueries.push({ match: { mood: mood } });
     
         if (mustQueries.length === 0) {
-          return res.status(400).send({ message: 'search parameters are empty' });
+          return res.status(400).send({ message: 'Search parameters are empty' });
         }
     
         const data = await client.search({
