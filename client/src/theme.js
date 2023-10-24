@@ -6,10 +6,11 @@ const theme = createTheme({
       main: '#6b0772', 
     },
     secondary: {
-      main: '#FF5722', 
+      main: '#FF5722', // Change this to your secondary color
+    },
   },
   typography: {
-    fontFamily: 'Arial, sans-serif', 
+    fontFamily: 'Arial, sans-serif', // Change this to your preferred font
   },
 });
 
