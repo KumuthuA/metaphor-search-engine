@@ -78,9 +78,6 @@
         "type": "text",
         "analyzer": "sinhala_analyzer"
       },
-      "count": {
-        "type": "integer"
-      },
       "interpretation": {
         "type": "text",
         "analyzer": "sinhala_analyzer"

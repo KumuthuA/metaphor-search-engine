@@ -57,6 +57,7 @@ const SearchResultTable = () => {
           mood: item._source.mood,
           interpretation: item._source.interpretation,
           metaphor: item._source.line,
+          book: item._source.book,
         }));
         setRows(allData);
       })
@@ -87,6 +88,7 @@ const SearchResultTable = () => {
         mood: item._source.mood,
         interpretation: item._source.interpretation,
         metaphor: item._source.line,
+        book: item._source.book,
       }));
 
       setRows(filteredData);
@@ -96,14 +98,15 @@ const SearchResultTable = () => {
   };
 
   const columns = [
-    { field: "metaphor", headerName: "Metaphor", width: 200 },
-    { field: "interpretation", headerName: "Interpretation", width: 300 },
-    { field: "source", headerName: "Source", width: 150 },
-    { field: "target", headerName: "Target", width: 150 },
+    { field: "metaphor", headerName: "Metaphor", width: 300 },
+    { field: "interpretation", headerName: "Interpretation", width: 400 },
+    { field: "source", headerName: "Source", width: 120 },
+    { field: "target", headerName: "Target", width: 120 },
+    { field: "mood", headerName: "Mood", width: 100 },
     { field: "poet", headerName: "Poet", width: 150 },
+    { field: "book", headerName: "Book", width: 150 },
     { field: "poem", headerName: "Poem", width: 150 },
-    { field: "year", headerName: "Year", width: 150 },
-    { field: "mood", headerName: "Mood", width: 150 },
+    { field: "year", headerName: "Year", width: 100 },  
   ];
 
   return (
