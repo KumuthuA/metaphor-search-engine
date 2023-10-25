@@ -17,7 +17,7 @@ Make sure you have the following software installed on your machine:
 1. Clone the repository:
 
    ```sh
-   git clone https://github.com/your/repository.git
+   git clone https://github.com/KumuthuA/metaphor-search-engine
 2. Run Kibana and elastic search using cmd:
 3. Add data to elastic search using the following commands.
    ```sh
