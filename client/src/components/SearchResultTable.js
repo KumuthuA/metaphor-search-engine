@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, TextField, Grid } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { makeStyles } from "@mui/styles";
-import axios from 'axios';
+import axios from "axios";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,8 +31,20 @@ const SearchResultTable = () => {
     });
   };
 
+  const handleReset = () => {
+    setSearchData({
+      poet: "",
+      poem: "",
+      source: "",
+      target: "",
+      year: "",
+      mood: "",
+    });
+  };
+
   useEffect(() => {
-    axios.get(`${apiUrl}/metaphors`)
+    axios
+      .get(`${apiUrl}/metaphors`)
       .then((response) => {
         const data = response.data;
         const allData = data.map((item) => ({
@@ -49,10 +61,9 @@ const SearchResultTable = () => {
         setRows(allData);
       })
       .catch((error) => {
-        console.error('Error:', error);
+        console.error("Error:", error);
       });
-  }, []);
-
+  }, [searchData]);
 
   const handleSearch = async () => {
     try {
@@ -62,11 +73,9 @@ const SearchResultTable = () => {
 
       const response = await axios.post(`${apiUrl}/search`, searchDataToSend, {
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
       });
-
-      console.log('Search response', response.data);
 
       const filteredData = response.data.map((item) => ({
         id: item._id,
@@ -82,7 +91,7 @@ const SearchResultTable = () => {
 
       setRows(filteredData);
     } catch (error) {
-      console.error('Error', error);
+      console.error("Error: ", error);
     }
   };
 
@@ -155,8 +164,21 @@ const SearchResultTable = () => {
           />
         </Grid>
       </Grid>
-      <Button variant="contained" color="primary" onClick={handleSearch}>
+      <Button
+        variant="contained"
+        color="primary"
+        onClick={handleSearch}
+        style={{ marginTop: "20px", marginBottom: "20px", marginRight: "20px" }}
+      >
         Search
+      </Button>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={handleReset}
+        style={{ marginTop: "20px", marginBottom: "20px" }}
+      >
+        Reset
       </Button>
       <div style={{ height: 400, width: "100%" }}>
         <DataGrid rows={rows} columns={columns} pageSize={5} />
