@@ -1,5 +1,6 @@
 # BuildingTextCorpusandSearchApplication
-The development of a versatile search application that leverages this corpus, serving as a valuable resource for poets, language enthusiasts, and researchers. The application is designed to cater to specific user needs and enhance the appreciation of metaphorical expressions in these languages.
+The objective of the Sinhala Metaphor Search Engine is to provide a valuable resource for poets, writers, students, and language enthusiasts who want to explore and understand metaphors in Sinhala literature and creative works. It will enable users to search, explore, and analyse Sinhala metaphors based on various attributes.
+
 ## Getting Started
 
 These instructions will help you set up and run the project on your local machine.
@@ -8,8 +9,8 @@ These instructions will help you set up and run the project on your local machin
 
 Make sure you have the following software installed on your machine:
 
-- Elasticsearch (version X.X.X)
-- curl (if not already installed)
+- Elasticsearch 
+- curl 
 
 ### Installation
 
